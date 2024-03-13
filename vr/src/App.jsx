@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import './App.css'
 import Loginaccess from './components/Loginaccess';
@@ -15,11 +14,12 @@ function App() {
     localStorage.clear();
     setToken("");
     setUserName("");
-    window.location.href = 'http://localhost:5173/'
+    window.location.href = '../index.html'
+    window.reload();
   }
 
   const goback = () => {
-    window.location.href = 'http://localhost:5173/'
+    window.location.href = '../index.html'
   }
     return (
       <div>

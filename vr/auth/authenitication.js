@@ -22,7 +22,7 @@ async function saveUsers(userName, passWord){
         })
         const resJson = await res.json();
         localStorage.setItem('token', resJson.token)
-        window.location.href = 'http://localhost:5173/login.html'
+        window.location.href = 'login.html'
         }catch(err){
             console.log('Error', err);
         }

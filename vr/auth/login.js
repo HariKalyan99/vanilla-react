@@ -28,7 +28,7 @@ if(token){
           .then((res) => res.json())
           .then((data) => {
             localStorage.setItem("username", data.firstName);
-            window.location.href = "http://localhost:5173/mainpage.html";
+            window.location.href = "mainpage.html";
           });
         }catch(err){
           console.log("Error", err);
