@@ -6,7 +6,32 @@ let confirmPassword = document.querySelector("#confirmPassword");
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log(userName.value, password.value);
-    window.location.href = 'http://localhost:5173/login.html';
+    saveUsers(userName.value, password.value);
 })
+
+async function saveUsers(userName, passWord){
+    if(userName === 'kminchelle' && passWord === '0lelplR'){
+        try {
+            const res = await fetch('https://dummyjson.com/auth/login', {
+            method: "POST",
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                username: userName,
+                password: passWord,
+            })
+        })
+        const resJson = await res.json();
+        localStorage.setItem('token', resJson.token)
+        window.location.href = 'http://localhost:5173/login.html'
+        }catch(err){
+            console.log('Error', err);
+        }
+    }else {
+        alert("Invalid username and password")
+    }
+}
+
+
+
+
 
