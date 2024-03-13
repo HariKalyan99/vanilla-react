@@ -2,8 +2,8 @@ let formLogin = document.querySelector("#formSubmitLogin");
 let userNameLogin = document.querySelector("#usernameLogin");
 let passwordLogin = document.querySelector("#passwordLogin");
 
-let tok = localStorage.getItem("token");
-if(tok){
+let token = localStorage.getItem("token");
+if(token){
     formLogin.addEventListener("submit", (event) => {
         event.preventDefault();
         if (
@@ -11,18 +11,18 @@ if(tok){
           passwordLogin.value === "0lelplR"
         ) {
           
-          loginUser(tok);
+          loginUser(token);
         } else {
           alert("Invalid username and password");
         }
       });
       
-      function loginUser(tok) {
+      function loginUser(token) {
         try {
           fetch("https://dummyjson.com/auth/me", {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${tok}`,
+            Authorization: `Bearer ${token}`,
           },
         })
           .then((res) => res.json())

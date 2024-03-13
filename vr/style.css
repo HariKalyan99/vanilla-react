@@ -1,0 +1,64 @@
+body {
+    background-image: url('https://wallpapers.com/images/hd/composer-workspace-blogging-backdrop-4ferx6eq7jp9z9im.jpg');
+    opacity: 0.6;
+    background-repeat: no-repeat;
+}
+
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    min-width: 400px;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#formSubmit {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    min-width: 400px;
+    height: 500px;
+    position: fixed;
+    border-radius: 16px;
+    color: white;
+background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
+filter: drop-shadow(0mm -1mm 4mm rgb(255, 255, 255));
+}
+
+#formSubmit input {
+    width: 300px;
+    height: 35px;
+    border: none;
+    background: transparent;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    padding: 10px;
+    color: white;
+    font-size: large;
+}
+
+#formSubmit button {
+    width: 80px;
+    height: 30px;
+    background-color: #d4983e;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+#formSubmit button:hover {
+    cursor: pointer;
+    background-color: #b18544;
+}
+
+
+@media (max-width: 500px) {
+    #formSubmit {
+        min-width: 400px;
+    }
+}

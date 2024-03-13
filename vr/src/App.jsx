@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import './App.css'
+import Loginaccess from './components/Loginaccess';
 
 function App() {
 
@@ -10,9 +11,10 @@ function App() {
   const [getToken, setToken] = useState(token);
   const [getUserName, setUserName] = useState(userName);
 
-  const handleClick = () => {
+  const handleLogout = () => {
     localStorage.clear();
     setToken("");
+    setUserName("");
     window.location.href = 'http://localhost:5173/'
   }
 
@@ -21,11 +23,7 @@ function App() {
   }
     return (
       <div>
-        {getToken && getUserName ? <div>
-          <h1>Hello {getUserName}</h1>
-          <button onClick={handleClick}>Logout</button>
-        </div> : <button onClick={goback}>Error You need to login first</button>}
-
+        <Loginaccess handleLogout={handleLogout} goback={goback} getToken={getToken} getUserName={getUserName}/>
       </div>
     )
 
