@@ -1,6 +1,6 @@
 body {
-  background-image: url("https://wallpapers.com/images/hd/composer-workspace-blogging-backdrop-4ferx6eq7jp9z9im.jpg");
-  opacity: 0.6;
+  background: url("https://wallpapers.com/images/hd/composer-workspace-blogging-backdrop-4ferx6eq7jp9z9im.jpg");
+  opacity: 0.8;
   background-repeat: no-repeat;
 }
 
@@ -42,7 +42,7 @@ h1 {
   border-radius: 16px;
   color: #ffffff;
   background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
-  filter: drop-shadow(0 0 1rem #dc3545);
+  filter: drop-shadow(0 0 1rem #ff0019);
 }
 
 #formSubmit input {
@@ -52,7 +52,7 @@ h1 {
   background: transparent;
   border-bottom: 1px solid rgb(255, 255, 255);
   padding: 10px;
-  color: #dc3545;
+  color: #ff0019;
   font-size: large;
 }
 
@@ -68,7 +68,7 @@ h1 {
   border-radius: 16px;
   color: #ffffff;
   background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
-  filter: drop-shadow(0 0 1rem #dc3545);
+  filter: drop-shadow(0 0 1rem #ff0019);
 }
 
 #formSubmitLogin input {
@@ -78,14 +78,14 @@ h1 {
   background: transparent;
   border-bottom: 1px solid rgb(255, 255, 255);
   padding: 10px;
-  color: #dc3545;
+  color: #ff0019;
   font-size: large;
 }
 
 #formSubmit button {
   width: 90px;
   height: 40px;
-  background-color: #dc3545;
+  background-color: #ff0019;
   border: none;
   border-radius: 5px;
   color: rgb(0, 0, 0);
@@ -96,7 +96,7 @@ h1 {
 #formSubmitLogin button {
   width: 90px;
   height: 40px;
-  background-color: #dc3545;
+  background-color: #ff0019;
   border: none;
   border-radius: 5px;
   color: rgb(0, 0, 0);
