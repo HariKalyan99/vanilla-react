@@ -4,6 +4,12 @@ body {
   background-repeat: no-repeat;
 }
 
+
+h1 {
+  color: #ff0019;
+  text-decoration: underline;
+}
+
 .form {
   display: flex;
   flex-wrap: wrap;
@@ -34,9 +40,9 @@ body {
   height: 500px;
   position: fixed;
   border-radius: 16px;
-  color: white;
+  color: #ffffff;
   background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
-  filter: drop-shadow(0 0 1rem rgb(0, 0, 0));
+  filter: drop-shadow(0 0 1rem #dc3545);
 }
 
 #formSubmit input {
@@ -46,7 +52,7 @@ body {
   background: transparent;
   border-bottom: 1px solid rgb(255, 255, 255);
   padding: 10px;
-  color: white;
+  color: #dc3545;
   font-size: large;
 }
 
@@ -60,9 +66,9 @@ body {
   height: 500px;
   position: fixed;
   border-radius: 16px;
-  color: white;
+  color: #ffffff;
   background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 62%);
-  filter: drop-shadow(0 0 1rem rgb(0, 0, 0));
+  filter: drop-shadow(0 0 1rem #dc3545);
 }
 
 #formSubmitLogin input {
@@ -72,33 +78,40 @@ body {
   background: transparent;
   border-bottom: 1px solid rgb(255, 255, 255);
   padding: 10px;
-  color: white;
+  color: #dc3545;
   font-size: large;
 }
 
 #formSubmit button {
-  width: 80px;
-  height: 30px;
-  background-color: #d4983e;
+  width: 90px;
+  height: 40px;
+  background-color: #dc3545;
   border: none;
   border-radius: 5px;
-  color: white;
-  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  border: 2px solid #ffffff;
 }
 
 #formSubmitLogin button {
-  width: 80px;
-  height: 30px;
-  background-color: #d4983e;
+  width: 90px;
+  height: 40px;
+  background-color: #dc3545;
   border: none;
   border-radius: 5px;
-  color: white;
-  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  border: 2px solid #ffffff;
 }
 
 #formSubmit button:hover {
   cursor: pointer;
-  background-color: #b18544;
+  background-color: #ffffff;
+}
+
+#formSubmitLogin button:hover {
+  cursor: pointer;
+  background-color: #ffffff;
 }
 
 @media (max-width: 500px) {

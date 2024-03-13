@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './App.css'
 import Loginaccess from './components/Loginaccess';
+import Header from './components/Header';
+import Dashboard from './components/Dashboard';
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
     return (
       <div>
         <Loginaccess handleLogout={handleLogout} goback={goback} getToken={getToken} getUserName={getUserName}/>
+        <Header />
+        <Dashboard />
       </div>
     )
 
