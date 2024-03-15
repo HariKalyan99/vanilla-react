@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Header = () => {
+const Header = ({switchBetween,
+  getSwitch}) => {
   return (
     <header data-bs-theme="dark">
   <div class="text-bg-dark collapse" id="navbarHeader">
@@ -24,13 +25,13 @@ const Header = () => {
   <div class="navbar navbar-dark bg-danger shadow-sm">
     <div class="container">
     <ul class="nav nav-pills flex-row mb-auto">
-      <li class="nav-item ">
-        <a href="#" class="nav-link active bg-dark" aria-current="page">
+      <li class="nav-item" onClick={() => switchBetween("home")}>
+        <a href="#" className={`nav-link text-white ${getSwitch === "home" && 'bg-dark'}`} aria-current="home">
           Home
         </a>
       </li>
-      <li>
-        <a href="#" class="nav-link text-white">
+      <li onClick={() => switchBetween("createPost")}>
+        <a href="#" className={`nav-link text-white ${getSwitch === "createPost" && 'bg-dark'}`} aria-current="createPost">
           Dashboard
         </a>
       </li>
