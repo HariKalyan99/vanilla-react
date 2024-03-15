@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import axios from 'axios';
 import './App.css'
+import Createpost from './components/Createpost';
 
 function App() {
   let token = localStorage.getItem('token');
@@ -50,7 +51,7 @@ function App() {
       <div>
         <Loginaccess handleLogout={handleLogout} goback={goback} getToken={getToken} getUserName={getUserName}/>
         <Header switchBetween={switchBetween} getSwitch={getSwitch}/>
-        <Dashboard postList={postList}/>
+        {getSwitch === "home" ? <Dashboard postList={postList}/> : <Createpost />}
       </div>
     )
 

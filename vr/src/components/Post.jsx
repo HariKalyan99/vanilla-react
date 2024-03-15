@@ -4,16 +4,21 @@ const Post = ({ post }) => {
   return (
     <div class="col">
       <div class="card shadow-sm">
-      <span class="position-absolute z-2 top-0 start-0 translate-middle badge rounded-pill bg-dark">
-    {post.reactions}+
-    <span class="visually-hidden">unread messages</span>
-  </span>
+        <span class="position-absolute z-2 top-0 start-50 translate-middle badge rounded-pill bg-dark pt-2">
+          {post.reactions}{" "}
+          <sup>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-heart-fill text-danger" viewBox="0 0 16 16">
+  <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15m0-9.007c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
+</svg>
+          </sup>
+          <span class="visually-hidden">unread messages</span>
+        </span>
         <img
           src="https://www.socialchamp.io/wp-content/uploads/2022/06/Blog-Banner_Q2-2023_1125x600_39_How-to-Post-on-Pinterest-1.png"
           alt={post.title}
           className="img-eff"
         />
-        
+
         <div
           class="card-body"
           style={{
@@ -23,7 +28,7 @@ const Post = ({ post }) => {
             justifyContent: "space-around",
           }}
         >
-            <small>userId: {post.userId}</small>
+          <small>userId: {post.userId}</small>
           <h4 class="card-text text-danger">
             {post.title}{" "}
             <span className="spanSvg">
@@ -52,10 +57,18 @@ const Post = ({ post }) => {
               ))}
             </div>
           </div>
-          
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-calendar-x-fill" viewBox="0 0 16 16" className="deletePost">
-          <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M6.854 8.146 8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708"/>
-        </svg>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="25"
+            height="25"
+            fill="currentColor"
+            class="bi bi-calendar-x-fill"
+            viewBox="0 0 16 16"
+            className="deletePost"
+          >
+            <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2M6.854 8.146 8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 1 1 .708-.708" />
+          </svg>
         </div>
       </div>
     </div>
