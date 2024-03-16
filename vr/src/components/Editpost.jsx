@@ -1,6 +1,8 @@
 import React from "react";
 
 const Editpost = () => {
+
+  //gets requested from two components!
   return (
     <div class="col">
       <div class="card shadow-sm">

@@ -33,6 +33,9 @@ function App() {
   
   const [postList, setPostList] = useState([]);
 
+  const [getAddPost, setAddPost] = useState("");  
+  const [getDelPost, setDelPost] = useState("");  
+
 
   useEffect(() => {
     const controller = new AbortController();
@@ -47,11 +50,61 @@ function App() {
     }
     fetchPosts();
   }, [])
+
+  useEffect(() => {
+    const addPosts = async({userId,
+      title,
+      body,
+      tags,
+      reactions, id}) => {
+      try{
+        const {data} = await axios.post('http://localhost:8081/posts', {
+        id,
+        title,
+        body,
+        userId,
+        tags,
+        reactions});
+        setPostList([{id: data.id, userId: data.userId, title: data.title, body: data.body, tags: data.tags, reactions: data.reactions}, ...postList])
+      }catch(err) {
+        console.log("Error", err)
+      }
+    }
+    if(getAddPost.title){
+      addPosts(getAddPost);
+    }
+  }, [getAddPost])
+
+
+  useEffect(() => {
+    const delPosts = async(id) => {
+      try{
+        await axios.delete(`http://localhost:8081/posts/${id}`);
+        const findPost = postList.filter(x => x.id !== id)
+        setPostList(findPost)
+      }catch(err) {
+        console.log("Error", err)
+      }
+    }
+    if(getDelPost){
+      delPosts(getDelPost);
+    }
+  }, [getDelPost])
+
+
+
+  const addPost = (post) => {
+    setAddPost(post)
+  }
+
+  const delPost = (id) => {
+    setDelPost(id)
+  }
     return (
       <div>
         <Loginaccess handleLogout={handleLogout} goback={goback} getToken={getToken} getUserName={getUserName}/>
         <Header switchBetween={switchBetween} getSwitch={getSwitch}/>
-        {getSwitch === "home" ? <Dashboard postList={postList}/> : <Createpost />}
+        {getSwitch === "home" ? <Dashboard postList={postList} delPost={delPost}/> : <Createpost addPost={addPost} />}
       </div>
     )
 

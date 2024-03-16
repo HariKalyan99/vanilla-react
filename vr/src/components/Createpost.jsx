@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useRef } from "react";
 import Editpost from "./Editpost";
+import {v4 as uuidv4} from 'uuid';
 
-const Createpost = () => {
+const Createpost = ({addPost}) => {
+
+
+  const userIdRef = useRef("")
+  const titleRef = useRef("")
+  const bodyRef = useRef("")
+  const tagsRef = useRef("")
+  const reactionsRef = useRef("")
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userId = Number(userIdRef.current.value);
+    const title = titleRef.current.value;
+    const body = bodyRef.current.value;
+    const tags = tagsRef.current.value.split(",");
+    const reactions = Number(reactionsRef.current.value);
+
+    addPost({userId,
+      title,
+      body,
+      tags,
+      reactions, id: uuidv4()})
+  }
   return (
     <div class="col g-5 d-flex bg-dark justify-content-center m-5 flex-wrap">
       <div class="col-sm-12 col-md-8 col-lg-5">
         <h2 className="mt-4 text-center">Create a Post</h2>
-        <form class="needs-validation" novalidate="">
+        <form class="needs-validation"  onSubmit={(e) => handleSubmit(e)}>
           <div class="row g-3">
             <div class="col-12">
-              <label for="firstName" class="form-label">
+              <label htmlFor="firstName" class="form-label">
                 User Id
               </label>
               <input
@@ -18,15 +41,18 @@ const Createpost = () => {
                 id="firstName"
                 placeholder=""
                 required=""
+                ref={userIdRef}
+
               />
               <div class="invalid-feedback">Valid first name is required.</div>
             </div>
 
             <div class="col-12">
-              <label for="title" class="form-label">
+              <label htmlFor="title" class="form-label">
                 Title
               </label>
-              <input type="text" class="form-control" id="title" required="" />
+              <input type="text" class="form-control" id="title" required="" 
+              ref={titleRef}/>
               <div class="invalid-feedback">
                 Please enter your shipping title.
               </div>
@@ -42,14 +68,15 @@ const Createpost = () => {
               placeholder="Leave a comment here"
               id="floatingTextarea2"
               style={{ height: "100px" }}
+              ref={bodyRef}
             ></textarea>
-            <label for="floatingTextarea2">Comments</label>
+            <label htmlFor="floatingTextarea2">Comments</label>
           </div>
 
           <hr class="my-4" />
 
           <div class="col-12">
-            <label for="username" class="form-label">
+            <label htmlFor="username" class="form-label">
               Tags
             </label>
             <div class="input-group has-validation">
@@ -60,12 +87,13 @@ const Createpost = () => {
                 id="username"
                 placeholder="Username"
                 required=""
+                ref={tagsRef}
               />
               <div class="invalid-feedback">Tags must be entered with ','.</div>
             </div>
           </div>
           <hr class="my-4" />
-          <label for="username" class="form-label">
+          <label htmlFor="username" class="form-label">
             Reactions
           </label>
           <div class="input-group has-validation">
@@ -87,6 +115,7 @@ const Createpost = () => {
               id="username"
               placeholder="Username"
               required=""
+              ref={reactionsRef}
             />
             <div class="invalid-feedback">Tags must be entered with ','.</div>
           </div>
