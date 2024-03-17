@@ -1,13 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Editpost = () => {
-
+const Editpost = ({userId,
+  title,
+  body,
+  tags,
+  reactions}) => {
   //gets requested from two components!
+
+
+  const [showTags, setShowTags] = useState([]);
+  useEffect(() => {
+    if(tags){
+      let tag = [];
+      let str = "#";
+      for(let i = 0; i<tags.length; i++){
+      if(tags[i] === ","){
+        tag.push(str)
+        str = "#"
+      }else {
+        str+=tags[i];
+      }
+     }
+     setShowTags(tag)
+    }
+  }, [tags])
   return (
     <div class="col">
       <div class="card shadow-sm">
         <span class="position-absolute z-2 top-0 start-50 translate-middle badge rounded-pill bg-dark pt-2">
-          post.reactions{" "}
+          {reactions}
           <sup>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -37,14 +58,15 @@ const Editpost = () => {
             justifyContent: "space-around",
             
           }}
+          
         >
-          <small>userId: post.userId</small>
-          <h4 class="card-text text-danger">post.title </h4>
+          <small>UserId: {userId}</small>
+          <h4 class="card-text text-danger">{title} </h4>
 
-          <p class="card-text">post.body</p>
+          <p class="card-text">{body}</p>
           <div class="d-flex justify-content-evenly align-items-center">
             <div class="btn-group">
-              <pre> #tag </pre>
+              {showTags.map((tag, ind) => <pre key={ind}> {tag} </pre>)}
             </div>
           </div>
         </div>

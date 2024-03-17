@@ -34,7 +34,13 @@ function App() {
   const [postList, setPostList] = useState([]);
 
   const [getAddPost, setAddPost] = useState("");  
-  const [getDelPost, setDelPost] = useState("");  
+  const [getDelPost, setDelPost] = useState("");
+  
+  // const [readUserId, setReadUserId] = useState("");
+  // const [readTitle, setReadTitle] = useState("");
+  // const [readBody, setReadBody] = useState("");
+  // const [readTags, setReadTags] = useState("");
+  // const [readReactions, setReadReactions] = useState("");
 
 
   useEffect(() => {
@@ -100,6 +106,8 @@ function App() {
   const delPost = (id) => {
     setDelPost(id)
   }
+
+
     return (
       <div>
         <Loginaccess handleLogout={handleLogout} goback={goback} getToken={getToken} getUserName={getUserName}/>

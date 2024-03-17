@@ -1,23 +1,23 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Editpost from "./Editpost";
 import {v4 as uuidv4} from 'uuid';
 
 const Createpost = ({addPost}) => {
 
 
-  const userIdRef = useRef("")
-  const titleRef = useRef("")
-  const bodyRef = useRef("")
-  const tagsRef = useRef("")
-  const reactionsRef = useRef("")
+  const [userIdRef, setuserIdRef] = useState("")
+  const [titleRef, settitleRef] = useState("")
+  const [bodyRef, setbodyRef] = useState("")
+  const [tagsRef, settagsRef] = useState("")
+  const [reactionsRef, setreactionsRef] = useState("")
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userId = Number(userIdRef.current.value);
-    const title = titleRef.current.value;
-    const body = bodyRef.current.value;
-    const tags = tagsRef.current.value.split(",");
-    const reactions = Number(reactionsRef.current.value);
+    const userId = Number(userIdRef);
+    const title = titleRef;
+    const body = bodyRef;
+    const tags = tagsRef.split(",");
+    const reactions = Number(reactionsRef);
 
     addPost({userId,
       title,
@@ -41,7 +41,8 @@ const Createpost = ({addPost}) => {
                 id="firstName"
                 placeholder=""
                 required=""
-                ref={userIdRef}
+                value={userIdRef}
+                onChange={(e) => setuserIdRef(e.target.value)}
 
               />
               <div class="invalid-feedback">Valid first name is required.</div>
@@ -52,7 +53,8 @@ const Createpost = ({addPost}) => {
                 Title
               </label>
               <input type="text" class="form-control" id="title" required="" 
-              ref={titleRef}/>
+              value={titleRef}
+              onChange={(e) => settitleRef(e.target.value)}/>
               <div class="invalid-feedback">
                 Please enter your shipping title.
               </div>
@@ -68,7 +70,8 @@ const Createpost = ({addPost}) => {
               placeholder="Leave a comment here"
               id="floatingTextarea2"
               style={{ height: "100px" }}
-              ref={bodyRef}
+              value={bodyRef}
+              onChange={(e) => setbodyRef(e.target.value)}
             ></textarea>
             <label htmlFor="floatingTextarea2">Comments</label>
           </div>
@@ -87,7 +90,8 @@ const Createpost = ({addPost}) => {
                 id="username"
                 placeholder="Username"
                 required=""
-                ref={tagsRef}
+                value={tagsRef}
+                onChange={(e) => settagsRef(e.target.value)}
               />
               <div class="invalid-feedback">Tags must be entered with ','.</div>
             </div>
@@ -115,7 +119,8 @@ const Createpost = ({addPost}) => {
               id="username"
               placeholder="Username"
               required=""
-              ref={reactionsRef}
+              value={reactionsRef}
+              onChange={(e) => setreactionsRef(e.target.value)}
             />
             <div class="invalid-feedback">Tags must be entered with ','.</div>
           </div>
@@ -127,7 +132,11 @@ const Createpost = ({addPost}) => {
       </div>
       <div className="container m-3" style={{width: "600px"}}>
         <h1>Take a look!</h1>
-      <Editpost />
+      <Editpost userId={userIdRef}
+title={titleRef}
+body={bodyRef}
+tags={tagsRef}
+reactions={reactionsRef}/>
       </div>
     </div>
   );
