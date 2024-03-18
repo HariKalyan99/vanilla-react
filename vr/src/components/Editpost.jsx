@@ -1,78 +1,172 @@
 import React, { useEffect, useState } from "react";
 
-const Editpost = ({userId,
-  title,
-  body,
-  tags,
-  reactions}) => {
-  //gets requested from two components!
+const Editpost = ({
+  setEditPostActive,
+  editPostActive,
+  edit,
+  editPost,
+  post,
+}) => {
 
+  const [previousUserId, setPreviousUserId] = useState(post.userId || "");
+  const [previousTitle, setPreviousTitle] = useState(post.title || "");
+  const [previousBody, setPreviousBody] = useState(post.body || "");
+  const [previousTags, setPreviousTags] = useState(post.tags || "");
+  const [previousReactions, setPreviousReactions] = useState(
+    post.reactions || ""
+  );
 
-  const [showTags, setShowTags] = useState([]);
-  useEffect(() => {
-    if(tags){
-      let tag = [];
-      let str = "#";
-      for(let i = 0; i<tags.length; i++){
-      if(tags[i] === ","){
-        tag.push(str)
-        str = "#"
-      }else {
-        str+=tags[i];
-      }
-     }
-     setShowTags(tag)
-    }
-  }, [tags])
-  return (
-    <div class="col">
-      <div class="card shadow-sm">
-        <span class="position-absolute z-2 top-0 start-50 translate-middle badge rounded-pill bg-dark pt-2">
-          {reactions}
-          <sup>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-chat-heart-fill text-danger"
-              viewBox="0 0 16 16"
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    const UserId = Number(previousUserId);
+    const Title = previousTitle;
+    const Body = previousBody;
+    const Tags = previousTags.split(",");
+    const Reactions = Number(previousReactions);
+    editPost({ UserId, Title, Body, Tags, Reactions, Id: post.id });
+    setEditPostActive(!editPostActive);
+  };
+
+  if (edit) {
+    return (
+      <div className="col position-relative z-2">
+        <div className="card shadow-sm">
+          <img
+            src="https://www.socialchamp.io/wp-content/uploads/2022/06/Blog-Banner_Q2-2023_1125x600_39_How-to-Post-on-Pinterest-1.png"
+            alt="post.title"
+            className="img-eff"
+          />
+
+          <div
+            className="card-body"
+            style={{
+              height: "650px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-around",
+            }}
+          >
+            <form
+              className="needs-validation"
+              onSubmit={(e) => handleEditSubmit(e)}
             >
-              <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15m0-9.007c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
-            </svg>
-          </sup>
-          <span class="visually-hidden">unread messages</span>
-        </span>
-        <img
-          src="https://www.socialchamp.io/wp-content/uploads/2022/06/Blog-Banner_Q2-2023_1125x600_39_How-to-Post-on-Pinterest-1.png"
-          alt="post.title"
-          className="img-eff"
-        />
+              <div className="row ">
+                <div className="col-12">
+                  <label htmlFor="firstName" className="form-label">
+                    User Id
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="firstName"
+                    placeholder=""
+                    required=""
+                    value={previousUserId}
+                    onChange={(e) => setPreviousUserId(e.target.value)}
+                  />
+                  <div className="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
 
-        <div
-          class="card-body"
-          style={{
-            height: "400px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
-            
-          }}
-          
-        >
-          <small>UserId: {userId}</small>
-          <h4 class="card-text text-danger">{title} </h4>
+                <div className="col-12">
+                  <label htmlFor="title" className="form-label">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="title"
+                    required=""
+                    value={previousTitle}
+                    onChange={(e) => setPreviousTitle(e.target.value)}
+                  />
+                  <div className="invalid-feedback">
+                    Please enter your shipping title.
+                  </div>
+                </div>
+              </div>
 
-          <p class="card-text">{body}</p>
-          <div class="d-flex justify-content-evenly align-items-center">
-            <div class="btn-group">
-              {showTags.map((tag, ind) => <pre key={ind}> {tag} </pre>)}
-            </div>
+              <p> Body</p>
+
+              <div className="form-floating">
+                <textarea
+                  className="form-control"
+                  id="floatingTextarea2"
+                  style={{ height: "100px" }}
+                  value={previousBody}
+                  onChange={(e) => setPreviousBody(e.target.value)}
+                ></textarea>
+                <label htmlFor="floatingTextarea2"></label>
+              </div>
+
+              <div className="col-12">
+                <label htmlFor="username" className="form-label">
+                  Tags
+                </label>
+                <div className="input-group has-validation">
+                  <span className="input-group-text text-bg-dark">#</span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder="Username"
+                    required=""
+                    value={previousTags}
+                    onChange={(e) => setPreviousTags(e.target.value)}
+                  />
+                  <div className="invalid-feedback">
+                    Tags must be entered with ','.
+                  </div>
+                </div>
+              </div>
+              <label htmlFor="username" className="form-label">
+                Reactions
+              </label>
+              <div className="input-group has-validation">
+                <span className="input-group-text text-bg-dark">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-chat-heart-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9 9 0 0 0 8 15m0-9.007c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  placeholder="Username"
+                  required=""
+                  value={previousReactions}
+                  onChange={(e) => setPreviousReactions(e.target.value)}
+                />
+                <div className="invalid-feedback">
+                  Tags must be entered with ','.
+                </div>
+              </div>
+              <hr />
+              <button
+                className="w-100 btn btn-danger btn-lg mb-3"
+                type="submit"
+              >
+                Add Post
+              </button>
+            </form>
+            {edit && (
+              <button onClick={() => setEditPostActive(!editPostActive)}>
+                Don't edit
+              </button>
+            )}
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Editpost;

@@ -35,13 +35,8 @@ function App() {
 
   const [getAddPost, setAddPost] = useState("");  
   const [getDelPost, setDelPost] = useState("");
+  const [getEditPost, setEditPost] = useState("");
   
-  // const [readUserId, setReadUserId] = useState("");
-  // const [readTitle, setReadTitle] = useState("");
-  // const [readBody, setReadBody] = useState("");
-  // const [readTags, setReadTags] = useState("");
-  // const [readReactions, setReadReactions] = useState("");
-
 
   useEffect(() => {
     const controller = new AbortController();
@@ -97,6 +92,28 @@ function App() {
     }
   }, [getDelPost])
 
+  useEffect(() => {
+    const editPosts = async({ UserId, Title, Body, Tags, Reactions, Id }) => {
+      try{
+        const {data} = await axios.put(`http://localhost:8081/posts/${Id}`, {
+          id: Id,
+          title: Title,
+          body: Body,
+          userId: UserId,
+          tags: Tags,
+          reactions: Reactions
+        });
+        const newPostList = postList.filter(x => x.id !== Id)
+        setPostList([data, ...newPostList])
+      }catch(err) {
+        console.log("Error", err)
+      }
+    }
+    if(getEditPost.Title){
+      editPosts(getEditPost);
+    }
+  }, [getEditPost])
+
 
 
   const addPost = (post) => {
@@ -107,12 +124,15 @@ function App() {
     setDelPost(id)
   }
 
+  const editPost = (post) => {
+    setEditPost(post)
+  }
 
     return (
       <div>
         <Loginaccess handleLogout={handleLogout} goback={goback} getToken={getToken} getUserName={getUserName}/>
         <Header switchBetween={switchBetween} getSwitch={getSwitch}/>
-        {getSwitch === "home" ? <Dashboard postList={postList} delPost={delPost}/> : <Createpost addPost={addPost} />}
+        {getSwitch === "home" ? <Dashboard postList={postList} delPost={delPost} editPost={editPost}/> : <Createpost addPost={addPost} />}
       </div>
     )
 
