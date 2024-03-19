@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { BlogStore } from '../store/Blogsstore'
 
-const Loginaccess = ({getToken, getUserName, handleLogout, goback}) => {
+const Loginaccess = () => {
+  const {goback, handleLogout, getToken,getUserName } = useContext(BlogStore)
   return (
     <div>
         {getToken && getUserName ? <div  style={{display: "flex", justifyContent: "space-between"}}>

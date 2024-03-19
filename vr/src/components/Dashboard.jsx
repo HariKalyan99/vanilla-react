@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import Post from './Post'
+import { BlogStore } from '../store/Blogsstore'
 
-const Dashboard = ({postList, delPost, editPost}) => {
-  return (
-    <div className="album py-5 bg-body-tertiary" >
-    <div className="container">
+const Dashboard = () => {
+  const {postList, getSwitch} = useContext(BlogStore)
 
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
-        {postList.map((post) => <Post key={post.id} post={post} delPost={delPost} editPost={editPost}/>)}
+  if(getSwitch === "home"){
+    return (
+      <div className="album py-5 bg-body-tertiary" >
+      <div className="container">
+  
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+          {postList.map((post) => <Post key={post.id} post={post} />)}
+        </div>
+  
       </div>
-
     </div>
-  </div>
-  )
+    )
+  }
 }
 
 export default Dashboard

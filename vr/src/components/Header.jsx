@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { BlogStore } from "../store/Blogsstore";
 
-const Header = ({ switchBetween, getSwitch }) => {
+const Header = () => {
+
+  const {switchBetween, getSwitch} = useContext(BlogStore);
   return (
     <header data-bs-theme="dark">
       <div

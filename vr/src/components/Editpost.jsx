@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { BlogStore } from "../store/Blogsstore";
 
-const Editpost = ({
-  setEditPostActive,
-  editPostActive,
-  edit,
-  editPost,
-  post,
-}) => {
+const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
+  const { editPost } = useContext(BlogStore);
 
   const [previousUserId, setPreviousUserId] = useState(post.userId || "");
   const [previousTitle, setPreviousTitle] = useState(post.title || "");
@@ -158,7 +154,11 @@ const Editpost = ({
               </button>
             </form>
             {edit && (
-              <button onClick={() => setEditPostActive(!editPostActive)}>
+              <button
+                className="w-100 btn btn-dark btn-lg mb-3"
+                type="button"
+                onClick={() => setEditPostActive(!editPostActive)}
+              >
                 Don't edit
               </button>
             )}

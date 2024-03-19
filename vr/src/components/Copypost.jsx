@@ -4,7 +4,7 @@ const Copypost = ({ userId, title, body, tags, reactions }) => {
   const [showTags, setShowTags] = useState([]);
 
   useEffect(() => {
-    if (tags) {
+    if (tags !== " ") {
       let tag = [];
       let str = "#";
       for (let i = 0; i < tags.length; i++) {
@@ -53,14 +53,14 @@ const Copypost = ({ userId, title, body, tags, reactions }) => {
             justifyContent: "space-around",
           }}
         >
-          <small>UserId: {userId}</small>
-          <h4 className="card-text text-danger">{title} </h4>
-
-          <p className="card-text">{body}</p>
+          <big >UserId: {userId}</big>
+          <h4 className="card-text text-danger">Title: {title} </h4>
+          <p className="card-text text-center">Body: {body}</p>
           <div className="d-flex justify-content-evenly align-items-center">
             <div className="btn-group">
+            Tags:
               {showTags.map((tag, ind) => (
-                <pre key={ind}> {tag} </pre>
+                <pre key={ind} style={{fontSize: "1rem"}}> {tag} </pre>
               ))}
             </div>
           </div>

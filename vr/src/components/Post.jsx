@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Editpost from "./Editpost";
+import { BlogStore } from "../store/Blogsstore";
 
-const Post = ({ post, delPost, editPost }) => {
+const Post = ({post}) => {
+  const {delPost} = useContext(BlogStore)
   const [editPostActive, setEditPostActive] = useState(false);
 
   return (
@@ -11,7 +13,6 @@ const Post = ({ post, delPost, editPost }) => {
           setEditPostActive={setEditPostActive}
           editPostActive={editPostActive}
           edit
-          editPost={editPost}
           post={post}
         />
       ) : (
@@ -36,12 +37,16 @@ const Post = ({ post, delPost, editPost }) => {
             src="https://www.socialchamp.io/wp-content/uploads/2022/06/Blog-Banner_Q2-2023_1125x600_39_How-to-Post-on-Pinterest-1.png"
             alt={post.title}
             className="img-eff"
+            style={{cursor: "pointer"}}
           />
+
+         
+
 
           <div
             className="card-body"
             style={{
-              height: "400px",
+              height: "500px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-around",
