@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Copypost from "./Copypost";
 import { BlogStore } from "../store/Blogsstore";
+import { useNavigate } from "react-router-dom";
 
 const Createpost = () => {
 
-  const { addPost, getSwitch } = useContext(BlogStore)
+  const navigate = useNavigate();
+  const { addPost, switchBetween } = useContext(BlogStore)
   const [userIdRef, setuserIdRef] = useState("");
   const [titleRef, settitleRef] = useState("");
   const [bodyRef, setbodyRef] = useState("");
@@ -21,8 +23,9 @@ const Createpost = () => {
     const reactions = Number(reactionsRef);
 
     addPost({ userId, title, body, tags, reactions, id: uuidv4() });
+    navigate("/mainpage.html");
+    switchBetween("home")
   };
-  if(getSwitch === "createPost"){
     return (
       <div className="col g-5 d-flex bg-dark justify-content-center m-5 flex-wrap">
         <div className="col-sm-12 col-md-8 col-lg-5">
@@ -150,7 +153,6 @@ const Createpost = () => {
         </div>
       </div>
     );
-  }
 };
 
 export default Createpost;

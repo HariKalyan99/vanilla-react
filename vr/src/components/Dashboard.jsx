@@ -3,9 +3,8 @@ import Post from './Post'
 import { BlogStore } from '../store/Blogsstore'
 
 const Dashboard = () => {
-  const {postList, getSwitch} = useContext(BlogStore)
+  const {postList} = useContext(BlogStore)
 
-  if(getSwitch === "home"){
     return (
       <div className="album py-5 bg-body-tertiary" >
       <div className="container">
@@ -17,7 +16,6 @@ const Dashboard = () => {
       </div>
     </div>
     )
-  }
 }
 
 export default Dashboard

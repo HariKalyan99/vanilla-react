@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { BlogStore } from "../store/Blogsstore";
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
@@ -54,26 +55,26 @@ const Header = () => {
         <div className="container">
           <ul className="nav nav-pills flex-row mb-auto">
             <li className="nav-item" onClick={() => switchBetween("home")}>
-              <a
-                href="#"
+              <Link
+                to={"/mainpage.html"}
                 className={`nav-link text-white ${
                   getSwitch === "home" && "bg-dark"
                 }`}
                 aria-current="home"
               >
                 Dashboard
-              </a>
+              </Link>
             </li>
             <li onClick={() => switchBetween("createPost")}>
-              <a
-                href="#"
+              <Link
+                to={"/mainpage.html/create-post"}
                 className={`nav-link text-white ${
                   getSwitch === "createPost" && "bg-dark"
                 }`}
                 aria-current="createPost"
               >
                 Create Post
-              </a>
+              </Link>
             </li>
           </ul>
           <button
