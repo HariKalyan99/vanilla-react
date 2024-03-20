@@ -5,7 +5,6 @@ import { BlogStore } from "../store/Blogsstore";
 const Post = ({post}) => {
   const {delPost} = useContext(BlogStore)
   const [editPostActive, setEditPostActive] = useState(false);
-
   return (
     <div className="col">
       {editPostActive ? (
@@ -16,7 +15,7 @@ const Post = ({post}) => {
           post={post}
         />
       ) : (
-        <div className="card shadow-sm">
+        <div className="card shadow-sm" >
           <span className="position-absolute z-2 top-0 start-50 translate-middle badge rounded-pill bg-dark pt-2">
             {post.reactions}{" "}
             <sup>
@@ -38,6 +37,7 @@ const Post = ({post}) => {
             alt={post.title}
             className="img-eff"
             style={{cursor: "pointer"}}
+            
           />
 
          
@@ -46,12 +46,13 @@ const Post = ({post}) => {
           <div
             className="card-body"
             style={{
-              height: "500px",
+              height: "400px",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-around",
             }}
           >
+
             <small>userId: {post.userId}</small>
             <h4 className="card-text text-danger">
               {post.title}{" "}

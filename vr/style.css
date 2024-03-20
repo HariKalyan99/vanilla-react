@@ -113,6 +113,15 @@ h1 {
   background-color: #ffffff;
 }
 
+.goBlogs {
+  text-decoration: underline; color: rgb(0, 0, 0); font-style: italic;
+}
+
+.goBlogs:hover {
+  color: rgb(255, 0, 0);
+}
+
+
 @media (max-width: 500px) {
   #formSubmit {
     min-width: 400px;

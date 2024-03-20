@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const Copypost = ({ userId, title, body, tags, reactions }) => {
   const [showTags, setShowTags] = useState([]);
+  const [opacityImage, setOpacityImage] = useState("0.4")
 
   useEffect(() => {
     if (tags !== " ") {
@@ -17,7 +18,12 @@ const Copypost = ({ userId, title, body, tags, reactions }) => {
       }
       setShowTags(tag);
     }
-  }, [tags]);
+    if(title.length > 0){
+      setOpacityImage("1")
+    }else {
+      setOpacityImage("0.4")
+    }
+  }, [tags, title]);
 
   return (
     <div className="col">
@@ -41,7 +47,7 @@ const Copypost = ({ userId, title, body, tags, reactions }) => {
         <img
           src="https://www.socialchamp.io/wp-content/uploads/2022/06/Blog-Banner_Q2-2023_1125x600_39_How-to-Post-on-Pinterest-1.png"
           alt="post.title"
-          className="img-eff"
+          style={{opacity: opacityImage}}
         />
 
         <div

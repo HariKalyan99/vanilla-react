@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Createpost = () => {
 
+  const token = localStorage.getItem('token')
   const navigate = useNavigate();
   const { addPost, switchBetween } = useContext(BlogStore)
   const [userIdRef, setuserIdRef] = useState("");
@@ -40,10 +41,11 @@ const Createpost = () => {
                   type="text"
                   className="form-control"
                   id="firstName"
-                  placeholder=""
+                  placeholder={token ? "Enter User Id" : "you don't have access"}
                   required=""
                   value={userIdRef}
                   onChange={(e) => setuserIdRef(e.target.value)}
+                  readOnly={!token && true}
                 />
                 <div className="invalid-feedback">
                   Valid first name is required.
@@ -59,8 +61,10 @@ const Createpost = () => {
                   className="form-control"
                   id="title"
                   required=""
+                  placeholder={token ? "Enter Title" : "you don't have access"}
                   value={titleRef}
                   onChange={(e) => settitleRef(e.target.value)}
+                  readOnly={!token && true}
                 />
                 <div className="invalid-feedback">
                   Please enter your shipping title.
@@ -74,11 +78,11 @@ const Createpost = () => {
             <div className="form-floating">
               <textarea
                 className="form-control"
-                placeholder="Leave a comment here"
                 id="floatingTextarea2"
                 style={{ height: "100px" }}
                 value={bodyRef}
                 onChange={(e) => setbodyRef(e.target.value)}
+                readOnly={!token && true}
               ></textarea>
               <label htmlFor="floatingTextarea2">Comments</label>
             </div>
@@ -95,14 +99,12 @@ const Createpost = () => {
                   type="text"
                   className="form-control"
                   id="username"
-                  placeholder="Username"
+                  placeholder={token ? "add comma after each tag" : "you don't have access"}
                   required=""
                   value={tagsRef}
                   onChange={(e) => settagsRef(e.target.value)}
+                  readOnly={!token && true}
                 />
-                <div className="invalid-feedback">
-                  Tags must be entered with ','.
-                </div>
               </div>
             </div>
             <hr className="my-4" />
@@ -126,10 +128,11 @@ const Createpost = () => {
                 type="text"
                 className="form-control"
                 id="username"
-                placeholder="Username"
+                placeholder={token ? "Reactions to this post" : "you don't have access"}
                 required=""
                 value={reactionsRef}
                 onChange={(e) => setreactionsRef(e.target.value)}
+                readOnly={!token && true}
               />
               <div className="invalid-feedback">
                 Tags must be entered with ','.
