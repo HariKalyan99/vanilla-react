@@ -1,7 +1,45 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useReducer } from "react";
 import axios from "axios";
 let token = localStorage.getItem("token");
 let userName = localStorage.getItem("username");
+
+function pureReducerFunction(currentPostList, action) {
+  let newPostList = currentPostList;
+  if (action.type === "INITIAL_POSTS") {
+    newPostList = action.payload.data;
+  } else if (action.type === "ADD_POST") {
+    newPostList = [
+      {
+        id: action.payload.id,
+        userId: action.payload.userId,
+        title: action.payload.title,
+        body: action.payload.body,
+        tags: action.payload.tags,
+        reactions: action.payload.reactions,
+      },
+      ...currentPostList,
+    ];
+  } else if (action.type === "DEL_POST") {
+    const filteredDelPosts = newPostList.filter(
+      (x) => x.id !== action.payload.id
+    );
+    newPostList = filteredDelPosts;
+  } else if (action.type === "EDIT_POST") {
+    const newPosts = newPostList.filter((x) => x.id !== action.payload.Id);
+    newPostList = [
+      {
+        id: action.payload.data.id,
+        userId: action.payload.data.userId,
+        title: action.payload.data.title,
+        body: action.payload.data.body,
+        tags: action.payload.data.tags,
+        reactions: action.payload.data.reactions,
+      },
+      ...newPosts,
+    ];
+  }
+  return newPostList;
+}
 
 export const BlogStore = createContext({
   postList: [],
@@ -40,7 +78,8 @@ const BlogsStoreContextProvider = ({ children }) => {
     setSwitch(content);
   };
 
-  const [postList, setPostList] = useState([]);
+  //reducer
+  const [postList, dispatchPostList] = useReducer(pureReducerFunction, []);
 
   const [getAddPost, setAddPost] = useState("");
   const [getDelPost, setDelPost] = useState("");
@@ -50,11 +89,16 @@ const BlogsStoreContextProvider = ({ children }) => {
     const controller = new AbortController();
     const { signal } = controller;
     const fetchPosts = async () => {
-      setLoading(!loading)
+      setLoading(!loading);
       try {
         const { data } = await axios.get("http://localhost:8081/posts", signal);
-        setPostList(data);
-        setLoading(!loading)
+        dispatchPostList({
+          type: "INITIAL_POSTS",
+          payload: {
+            data,
+          },
+        });
+        setLoading(!loading);
       } catch (err) {
         console.log("Error", err);
       }
@@ -73,8 +117,10 @@ const BlogsStoreContextProvider = ({ children }) => {
           tags,
           reactions,
         });
-        setPostList([
-          {
+
+        dispatchPostList({
+          type: "ADD_POST",
+          payload: {
             id: data.id,
             userId: data.userId,
             title: data.title,
@@ -82,8 +128,7 @@ const BlogsStoreContextProvider = ({ children }) => {
             tags: data.tags,
             reactions: data.reactions,
           },
-          ...postList,
-        ]);
+        });
       } catch (err) {
         console.log("Error", err);
       }
@@ -97,8 +142,13 @@ const BlogsStoreContextProvider = ({ children }) => {
     const delPosts = async (id) => {
       try {
         await axios.delete(`http://localhost:8081/posts/${id}`);
-        const findPost = postList.filter((x) => x.id !== id);
-        setPostList(findPost);
+
+        dispatchPostList({
+          type: "DEL_POST",
+          payload: {
+            id,
+          },
+        });
       } catch (err) {
         console.log("Error", err);
       }
@@ -119,8 +169,14 @@ const BlogsStoreContextProvider = ({ children }) => {
           tags: Tags,
           reactions: Reactions,
         });
-        const newPostList = postList.filter((x) => x.id !== Id);
-        setPostList([data, ...newPostList]);
+
+        dispatchPostList({
+          type: "EDIT_POST",
+          payload: {
+            data,
+            Id,
+          },
+        });
       } catch (err) {
         console.log("Error", err);
       }
@@ -156,22 +212,24 @@ const BlogsStoreContextProvider = ({ children }) => {
         getSwitch,
       }}
     >
-      {loading && <div>
-      <div
-        class="spinner-border"
-        style={{ width: "3rem", height: "3rem" }}
-        role="status"
-      >
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div
-        class="spinner-grow"
-        style={{ width: "3rem", height: "3rem" }}
-        role="status"
-      >
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      </div>}
+      {loading && (
+        <div>
+          <div
+            class="spinner-border"
+            style={{ width: "3rem", height: "3rem" }}
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <div
+            class="spinner-grow"
+            style={{ width: "3rem", height: "3rem" }}
+            role="status"
+          >
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       {children}
     </BlogStore.Provider>
   );
