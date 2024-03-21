@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useReducer } from "react";
+import { createContext, useState, useEffect, useReducer, useCallback } from "react";
 import axios from "axios";
 let token = localStorage.getItem("token");
 let userName = localStorage.getItem("username");
@@ -92,12 +92,12 @@ const BlogsStoreContextProvider = ({ children }) => {
       setLoading(!loading);
       try {
         const { data } = await axios.get("http://localhost:8081/posts", signal);
-        dispatchPostList({
+        useCallback(dispatchPostList({
           type: "INITIAL_POSTS",
           payload: {
             data,
           },
-        });
+        }), [dispatchPostList]);
         setLoading(!loading);
       } catch (err) {
         console.log("Error", err);
@@ -118,7 +118,7 @@ const BlogsStoreContextProvider = ({ children }) => {
           reactions,
         });
 
-        dispatchPostList({
+        useCallback(dispatchPostList({
           type: "ADD_POST",
           payload: {
             id: data.id,
@@ -128,7 +128,7 @@ const BlogsStoreContextProvider = ({ children }) => {
             tags: data.tags,
             reactions: data.reactions,
           },
-        });
+        }), [dispatchPostList]);
       } catch (err) {
         console.log("Error", err);
       }
@@ -143,12 +143,12 @@ const BlogsStoreContextProvider = ({ children }) => {
       try {
         await axios.delete(`http://localhost:8081/posts/${id}`);
 
-        dispatchPostList({
+        useCallback(dispatchPostList({
           type: "DEL_POST",
           payload: {
             id,
           },
-        });
+        }), [dispatchPostList]);
       } catch (err) {
         console.log("Error", err);
       }
@@ -170,13 +170,13 @@ const BlogsStoreContextProvider = ({ children }) => {
           reactions: Reactions,
         });
 
-        dispatchPostList({
+        useCallback(dispatchPostList({
           type: "EDIT_POST",
           payload: {
             data,
             Id,
           },
-        });
+        }), [dispatchPostList]);
       } catch (err) {
         console.log("Error", err);
       }
