@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { BlogStore } from "../store/Blogsstore";
 import { useNavigate } from "react-router-dom";
 import recycle from '../assets/re.png'
+import {v4 as uuidv4} from 'uuid';
 
 const Recyclebin = () => {
   const { deletedPost, addPost, switchBetween, setDeletedPost } = useContext(BlogStore);
@@ -16,7 +17,7 @@ const Recyclebin = () => {
     const id = post.id
     
 
-    addPost({ userId, title, body, tags, reactions, id});
+    addPost({ userId, title, body, tags, reactions, id: uuidv4()});
     const newRecycleList = deletedPost.filter(x => x.id !== id);
     setDeletedPost(newRecycleList)
     navigate("/mainpage.html");
