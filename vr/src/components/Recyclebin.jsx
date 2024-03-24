@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { BlogStore } from "../store/Blogsstore";
 import { useNavigate } from "react-router-dom";
+import recycle from '../assets/re.png'
 
 const Recyclebin = () => {
   const { deletedPost, addPost, switchBetween, setDeletedPost } = useContext(BlogStore);
@@ -103,8 +104,9 @@ const Recyclebin = () => {
     return (
         <div className="d-flex justify-content-center flex-column container align-items-center" style={{height: "800px"}}>
             <h1>Deleted blogs land here</h1>
-            <p>As of now no blogs have been deleted by the user..</p>
-            <img src="https://static.vecteezy.com/system/resources/previews/004/707/299/original/street-red-garbage-can-recycle-bin-free-vector.jpg" alt="" width={100}/>
+            <p>As of now no blogs have been deleted</p>
+            <img src={recycle} alt="recycle" style={{height: "300px"}}/>
+            <p className="text-danger fw-bold">Warning! if logged out, you can't retain your deleted posts.</p>
         </div>
     )
   }

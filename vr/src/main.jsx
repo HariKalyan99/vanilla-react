@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     path: "/mainpage.html", element: <Dashboard />
   }, {
     path: "/mainpage.html/create-post", element: <Createpost />
-  }, {path: "/mainpage.html/recycle-bin", element: <Recyclebin />} ]}
+  }, {path: "/mainpage.html/recycle-bin", element: <Recyclebin />}]}
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
