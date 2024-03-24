@@ -106,7 +106,7 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
                     type="text"
                     className="form-control"
                     id="username"
-                    placeholder="Username"
+                    placeholder="Tags"
                     required=""
                     value={previousTags}
                     onChange={(e) => setPreviousTags(e.target.value)}
@@ -136,7 +136,7 @@ const Editpost = ({ setEditPostActive, editPostActive, edit, post }) => {
                   type="text"
                   className="form-control"
                   id="username"
-                  placeholder="Username"
+                  placeholder="Reactions"
                   required=""
                   value={previousReactions}
                   onChange={(e) => setPreviousReactions(e.target.value)}
