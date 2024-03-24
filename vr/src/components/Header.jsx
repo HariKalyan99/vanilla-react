@@ -76,6 +76,17 @@ const Header = () => {
                 Create Post
               </Link>
             </li>
+            <li className="nav-item" onClick={() => switchBetween("recycle")}>
+              <Link
+                to={"/mainpage.html/recycle-bin"}
+                className={`nav-link text-white ${
+                  getSwitch === "recycle" && "bg-dark"
+                }`}
+                aria-current="recylce"
+              >
+                Recycle bin
+              </Link>
+            </li>
           </ul>
           <button
             className="navbar-toggler text-bg-dark"

@@ -52,6 +52,8 @@ export const BlogStore = createContext({
   getToken: "",
   getUserName: "",
   getSwitch: "",
+  deletedPost: [],
+  setDeletedPost: () => {},
 });
 
 const BlogsStoreContextProvider = ({ children }) => {
@@ -84,6 +86,7 @@ const BlogsStoreContextProvider = ({ children }) => {
   const [getAddPost, setAddPost] = useState("");
   const [getDelPost, setDelPost] = useState("");
   const [getEditPost, setEditPost] = useState("");
+  const [deletedPost, setDeletedPost] = useState([]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -141,12 +144,12 @@ const BlogsStoreContextProvider = ({ children }) => {
   useEffect(() => {
     const delPosts = async (id) => {
       try {
-        await axios.delete(`http://localhost:8081/posts/${id}`);
-
+        const {data} = await axios.delete(`http://localhost:8081/posts/${id}`);
+        setDeletedPost([...deletedPost, data]);
         useCallback(dispatchPostList({
           type: "DEL_POST",
           payload: {
-            id,
+            id
           },
         }), [dispatchPostList]);
       } catch (err) {
@@ -210,6 +213,8 @@ const BlogsStoreContextProvider = ({ children }) => {
         getUserName,
         handleLogout,
         getSwitch,
+        deletedPost,
+        setDeletedPost
       }}
     >
       {loading && (
